@@ -1,0 +1,27 @@
+name: Testes da Restful Booker API com Postman/Newman
+run-name: ${{ github.actor }} just made a push to the repository
+on: [push]
+env:
+  CAMINHO_TESTE: ./
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g bats
+      - run: bats -v
+  check-newman:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g newman
+      - run: npm install -g newman-reporter-htmlextra
+      - run: |
+            cd ${{ env.CAMINHO_TESTE }}
+            newman run "Testes Restful Booker API.postman_collection.json" -r htmlextra
