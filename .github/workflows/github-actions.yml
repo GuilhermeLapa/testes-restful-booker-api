@@ -21,8 +21,6 @@ jobs:
       - 
         name: "Run tests"
         run: newman run collection -r htmlextra
-      - name: Publish report
-        with:
-          file_path: './newman/htmlreport.html'
-          file_name: 'newmanReport.html'
-          file_type: 'html'
+      - 
+        name: Output summary to console
+        run: echo ${{ steps.check-newman.outputs.summary }}
