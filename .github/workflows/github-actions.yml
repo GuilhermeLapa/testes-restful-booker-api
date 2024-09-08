@@ -12,11 +12,14 @@ jobs:
         with:
           node-version: '20'
           collection: Testes Restful Booker API.postman_collection.json
-      - name: "Install newman"
+      - 
+        name: "Install newman"
         run: "npm install -g newman"
-      - name: "Install newman reporter"
+      - 
+        name: "Install newman reporter"
         run: "npm install -g newman-reporter-htmlextra"
-      - name: "Run tests"
+      - 
+        name: "Run tests"
         run: newman run collection -r htmlextra
       - name: Publish report
         with:
