@@ -1,6 +1,6 @@
 name: Testes da Restful Booker API com Postman/Newman
 run-name: ${{ github.actor }} just made a push to the repository
-on: [push, pull_request]
+on: [push]
 env:
   CAMINHO_TESTE: ./
 jobs:
