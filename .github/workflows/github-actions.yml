@@ -20,7 +20,7 @@ jobs:
   run-newman:
     defaults: 
       run: 
-        working-directory: ./testes-restful-booker-api
+        working-directory: ./home/runner/work/testes-restful-booker-api/testes-restful-booker-api
     runs-on: ubuntu-latest
     steps:
       - 
