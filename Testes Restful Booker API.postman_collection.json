@@ -1,0 +1,817 @@
+{
+	"info": {
+		"_postman_id": "c73888be-1cc6-4196-912c-de0f263b9713",
+		"name": "Testes Restful Booker API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1349412"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Create Token  Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status Code\", () => {\r",
+									"    pm.expect(pm.response).not.to.be.empty;\r",
+									"    pm.expect(pm.response.status).not.to.be.empty;\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"    pm.expect(pm.response.code).not.to.be.null;\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Body Response\", () => {\r",
+									"    pm.expect(pm.response.json()).not.to.be.empty;\r",
+									"    pm.expect(pm.response.json()).to.have.property(\"token\");\r",
+									"    pm.expect(pm.response.json().token).not.to.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"token\", pm.response.json().token);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"username\", \"admin\");\r",
+									"\r",
+									"pm.environment.set(\"password\", \"password123\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"{{username}}\",\r\n    \"password\" : \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Mandatory Value to Field Field Username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status Code\", () => {\r",
+									"    pm.expect(pm.response).not.to.be.empty;\r",
+									"    pm.expect(pm.response.code).not.to.be.null;\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"    pm.expect(pm.response.status).not.to.be.empty;\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Error Message\", () => {\r",
+									"    pm.expect(pm.response.json()).not.to.be.empty;\r",
+									"    pm.expect(pm.response.json()).to.have.property(\"reason\");\r",
+									"    pm.expect(pm.response.json().reason).to.be.equal(\"Bad credentials\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"username\", \"\");\r",
+									"\r",
+									"pm.environment.set(\"password\", \"password123\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"{{username}}\",\r\n    \"password\" : \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Mandatory Field Username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status Code\", () => {\r",
+									"    pm.expect(pm.response).not.to.be.empty;\r",
+									"    pm.expect(pm.response.code).not.to.be.null;\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"    pm.expect(pm.response.status).not.to.be.empty;\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Error Message\", () => {\r",
+									"    pm.expect(pm.response.json()).not.to.be.empty;\r",
+									"    pm.expect(pm.response.json()).to.have.property(\"reason\");\r",
+									"    pm.expect(pm.response.json().reason).to.be.equal(\"Bad credentials\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"password\", \"password123\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Mandatory Value to Field Field Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status Code\", () => {\r",
+									"    pm.expect(pm.response).not.to.be.empty;\r",
+									"    pm.expect(pm.response.code).not.to.be.null;\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"    pm.expect(pm.response.status).not.to.be.empty;\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Error Message\", () => {\r",
+									"    pm.expect(pm.response.json()).not.to.be.empty;\r",
+									"    pm.expect(pm.response.json()).to.have.property(\"reason\");\r",
+									"    pm.expect(pm.response.json().reason).to.be.equal(\"Bad credentials\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"username\", \"admin\");\r",
+									"\r",
+									"pm.environment.set(\"password\", \"\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"{{username}}\",\r\n    \"password\" : \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Mandatory Field Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status Code\", () => {\r",
+									"    pm.expect(pm.response).not.to.be.empty;\r",
+									"    pm.expect(pm.response.code).not.to.be.null;\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"    pm.expect(pm.response.status).not.to.be.empty;\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Error Message\", () => {\r",
+									"    pm.expect(pm.response.json()).not.to.be.empty;\r",
+									"    pm.expect(pm.response.json()).to.have.property(\"reason\");\r",
+									"    pm.expect(pm.response.json().reason).to.be.equal(\"Bad credentials\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"username\", \"admin\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{username}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Token Not Exist Username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status Code\", () => {\r",
+									"    pm.expect(pm.response).not.to.be.empty;\r",
+									"    pm.expect(pm.response.code).not.to.be.null;\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"    pm.expect(pm.response.status).not.to.be.empty;\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Error Message\", () => {\r",
+									"    pm.expect(pm.response.json()).not.to.be.empty;\r",
+									"    pm.expect(pm.response.json()).to.have.property(\"reason\");\r",
+									"    pm.expect(pm.response.json().reason).to.be.equal(\"Bad credentials\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"username\", \"DoesNotExist\");\r",
+									"\r",
+									"pm.environment.set(\"password\", \"password123\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"{{username}}\",\r\n    \"password\" : \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Token Not Exist Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status Code\", () => {\r",
+									"    pm.expect(pm.response).not.to.be.empty;\r",
+									"    pm.expect(pm.response.code).not.to.be.null;\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"    pm.expect(pm.response.status).not.to.be.empty;\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Error Message\", () => {\r",
+									"    pm.expect(pm.response.json()).not.to.be.empty;\r",
+									"    pm.expect(pm.response.json()).to.have.property(\"reason\");\r",
+									"    pm.expect(pm.response.json().reason).to.be.equal(\"Bad credentials\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"username\", \"admin\");\r",
+									"\r",
+									"pm.environment.set(\"password\", \"DoesNotExist\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"{{username}}\",\r\n    \"password\" : \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Token  Input Special Characters to Username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status Code\", () => {\r",
+									"    pm.expect(pm.response).not.to.be.empty;\r",
+									"    pm.expect(pm.response.code).not.to.be.null;\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"    pm.expect(pm.response.status).not.to.be.empty;\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Error Message\", () => {\r",
+									"    pm.expect(pm.response.json()).not.to.be.empty;\r",
+									"    pm.expect(pm.response.json()).to.have.property(\"reason\");\r",
+									"    pm.expect(pm.response.json().reason).to.be.equal(\"Bad credentials\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"username\", \"'\\/!@#$%&*()_+-=[]{}\");\r",
+									"\r",
+									"pm.environment.set(\"password\", \"password123\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"{{username}}\",\r\n    \"password\" : \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Token  Input Special Characters to Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status Code\", () => {\r",
+									"    pm.expect(pm.response).not.to.be.empty;\r",
+									"    pm.expect(pm.response.code).not.to.be.null;\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"    pm.expect(pm.response.status).not.to.be.empty;\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Error Message\", () => {\r",
+									"    pm.expect(pm.response.json()).not.to.be.empty;\r",
+									"    pm.expect(pm.response.json()).to.have.property(\"reason\");\r",
+									"    pm.expect(pm.response.json().reason).to.be.equal(\"Bad credentials\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"username\", \"admin\");\r",
+									"\r",
+									"pm.environment.set(\"password\", \"'\\/!@#$%&*()_+-=[]{}\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"{{username}}\",\r\n    \"password\" : \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Token  Invalid Username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status Code\", () => {\r",
+									"    pm.expect(pm.response).not.to.be.empty;\r",
+									"    pm.expect(pm.response.code).not.to.be.null;\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"    pm.expect(pm.response.status).not.to.be.empty;\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Error Message\", () => {\r",
+									"    pm.expect(pm.response.json()).not.to.be.empty;\r",
+									"    pm.expect(pm.response.json()).to.have.property(\"reason\");\r",
+									"    pm.expect(pm.response.json().reason).to.be.equal(\"Bad credentials\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//pm.environment.set(\"username\", \"DoesNotExist\");\r",
+									"\r",
+									"//pm.environment.set(\"password\", \"password123\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": null,\r\n    \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Token  Invalid Password Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check Status Code\", () => {\r",
+									"    pm.expect(pm.response).not.to.be.empty;\r",
+									"    pm.expect(pm.response.code).not.to.be.null;\r",
+									"    pm.expect(pm.response.code).to.be.equal(200);\r",
+									"    pm.expect(pm.response.status).not.to.be.empty;\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check Error Message\", () => {\r",
+									"    pm.expect(pm.response.json()).not.to.be.empty;\r",
+									"    pm.expect(pm.response.json()).to.have.property(\"reason\");\r",
+									"    pm.expect(pm.response.json().reason).to.be.equal(\"Bad credentials\");\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"username\", \"admin\");\r",
+									"\r",
+									"pm.environment.set(\"password\", \"DoesNotExist\");\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"{{username}}\",\r\n    \"password\" : \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base-url",
+			"value": "https://restful-booker.herokuapp.com",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "username",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
